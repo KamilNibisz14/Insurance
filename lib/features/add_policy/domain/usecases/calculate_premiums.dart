@@ -4,6 +4,55 @@ import 'package:insurance/features/add_policy/domain/entities/insurance_coverage
 import '../entities/premiums_data.dart';
 
 class CalculatePremiums {
+
+  //main constants
+  static const int personalIDYearOfBirthValue = 20;
+  static const int dateSubstringValue = 10;
+  static const double policyDurationDivider = 365;
+  static const double premiumsInTotalIfPremiumISTooLow = 25;
+
+  //period constants
+  static const int montPolicyPeriod = 30;
+  static const int halfAMonthPeriod = 14;
+  static const int weekPolicyPeriod = 7;
+  // calculate oc premiums constants
+  static const double ocOwnerCarDividend = 500;
+  static const double ocUserCarDividend = 1000;
+  static const double ocEngineCapacityDivider = 100;
+  static const double ocEnginePowerDivider = 90;
+  // calculate ac premiums constants
+  static const double acOwnerCarDividend = 500;
+  static const double acUserCarDividend = 1200;
+  static const double acEngineCapacityDivider = 100;
+  static const double acEnginePowerDivider = 80;
+  // calculate kr premiums constants
+  static const double krOwnerCarDividend = 300;
+  static const double krUserCarDividend = 500;
+  static const double krEngineCapacityDivider = 100;
+  static const double krEnginePowerDivider = 100;
+  // calculate fuel multiplication constants
+  static const double petrolMultiplication = 1.0;
+  static const double dieselMultiplication = 1.1;
+  static const double lpgMultiplication = 1.1;
+  static const double electricMultiplication = 1.2;
+  static const double hybridMultiplication = 1.0;
+  // calculate nnw premiums constants
+  static const double nnwBreakPoint = 3000;
+  static const double nnwSmallerPremium = 60;
+  static const double nnwBiggerPremium = 60;
+  // calculate was premiums constants
+  static const double wasBreakPoint = 3000;
+  static const double wasSmallerPremium = 102;
+  static const double wasBiggerPremium = 160;
+  // calculate other premiums constants
+  static const double blsPremium = 16;
+  static const double assPremium = 12;
+  static const double windowsPremium = 114;
+  static const double tiresPremium = 102;
+
+
+
+
   PremiumsData calculatePremiums(String ownerPersonalID,String userPersonalID,DateTime dateFrom,dateUntil,int engineCapacity,int enginePower,FuelType fuelType,int numbersOfPremiums,InsuranceCoverageData insuranceCoverageData) {
     int ownerAge = _calculatePersonAgeInDays(ownerPersonalID);
     int userAge = _calculatePersonAgeInDays(userPersonalID);
@@ -15,13 +64,11 @@ class CalculatePremiums {
     premiumsData.premiums = _getPremiums(policyDuration, ownerAge, userAge, engineCapacity, enginePower, numbersOfPremiums, fuelType, insuranceCoverageData,);
 
     return premiumsData;
-
   }
-
   int _calculatePersonAgeInDays(String personalID){
     DateTime currDate = DateTime.now();
     int currYear = currDate.year;
-    if(int.parse(personalID.substring(2,4)) > 20) {
+    if(int.parse(personalID.substring(2,4)) > personalIDYearOfBirthValue) {
       int yearOfBirth = int.parse('20${personalID.substring(0,2)}');
       return currYear-yearOfBirth;
     }
@@ -32,23 +79,23 @@ class CalculatePremiums {
   }
   List<String> _getPremiumsDates(int numberOfPremiums, int policyDuration){
     List<String> datesOfPremiums = [];
-    if(policyDuration <= 30){
-      if(policyDuration <= 7){
-        datesOfPremiums.add(DateTime.now().toString().substring(0,10));
+    if(policyDuration <= montPolicyPeriod){
+      if(policyDuration <= weekPolicyPeriod){
+        datesOfPremiums.add(DateTime.now().toString().substring(0,dateSubstringValue));
       }
       else{
-        datesOfPremiums.add(DateTime.now().add(const Duration(days: 7)).toString().substring(0,10));
+        datesOfPremiums.add(DateTime.now().add(const Duration(days: weekPolicyPeriod)).toString().substring(0,dateSubstringValue));
       }
     }
     else{
       if(numberOfPremiums == 1){
-        datesOfPremiums.add(DateTime.now().add(const Duration(days: 14)).toString().substring(0,10));
+        datesOfPremiums.add(DateTime.now().add(const Duration(days: halfAMonthPeriod)).toString().substring(0,dateSubstringValue));
       }
       else{
-        datesOfPremiums.add(DateTime.now().add(const Duration(days: 14)).toString().substring(0,10));
-        int breakBetween = ((policyDuration  - 14) / numberOfPremiums).floor();
+        datesOfPremiums.add(DateTime.now().add(const Duration(days: halfAMonthPeriod)).toString().substring(0,dateSubstringValue));
+        int breakBetween = ((policyDuration  - halfAMonthPeriod) / numberOfPremiums).floor();
         for(int i = 1; i < numberOfPremiums; ++i){
-          datesOfPremiums.add(DateTime.now().add(Duration(days: i * breakBetween)).toString().substring(0,10));
+          datesOfPremiums.add(DateTime.now().add(Duration(days: i * breakBetween)).toString().substring(0,dateSubstringValue));
         }
       }
     }
@@ -92,11 +139,11 @@ class CalculatePremiums {
     if(insuranceCoverage.hasWindows == true){
       premiumsInTotal += _calcWindows();
     }
-    if(premiumsInTotal ==0){
-      premiumsInTotal = 25;
+    if(premiumsInTotal <=premiumsInTotalIfPremiumISTooLow){
+      premiumsInTotal = premiumsInTotalIfPremiumISTooLow;
     }
 
-    if(policyDuration <= 30){
+    if(policyDuration <= montPolicyPeriod){
       premiums.add(premiumsInTotal.ceil());
       return premiums;
     }else{
@@ -115,21 +162,21 @@ class CalculatePremiums {
       int enginePower,
       FuelType fuelType,
       ){
-    double premium = (((500.0 / ownerAge) + (1000.0 / userAge)) * ((engineCapacity / 100.0) + (enginePower / 90.0))) * (policyDuration/365.0);
+    double premium = (((ocOwnerCarDividend / ownerAge) + (ocUserCarDividend / userAge)) * ((engineCapacity / ocEngineCapacityDivider) + (enginePower / ocEnginePowerDivider))) * (policyDuration/policyDurationDivider);
     if (fuelType == FuelType.Petrol) {
-      premium *= 1.0;
+      premium *= petrolMultiplication;
     }
     else if(fuelType == FuelType.Diesel) {
-      premium *= 1.1;
+      premium *= dieselMultiplication;
     }
     else if (fuelType == FuelType.LPG) {
-      premium *= 1.1;
+      premium *= lpgMultiplication;
     }
     else if (fuelType == FuelType.Electric) {
-      premium *= 1.2;
+      premium *= electricMultiplication;
     }
     else if (fuelType == FuelType.Hybrid) {
-      premium *= 1.0;
+      premium *= hybridMultiplication;
     }
 
     return premium;
@@ -143,21 +190,21 @@ class CalculatePremiums {
       int enginePower,
       FuelType fuelType,
       ){
-    double premium = (((500.0 / ownerAge) + (1200.0 / userAge)) * ((engineCapacity / 100.0) + (enginePower / 80.0))) * (policyDuration/365.0);
+    double premium = (((acOwnerCarDividend / ownerAge) + (acUserCarDividend / userAge)) * ((engineCapacity / acEngineCapacityDivider) + (enginePower / acEnginePowerDivider))) * (policyDuration/policyDurationDivider);
     if (fuelType == FuelType.Petrol) {
-      premium *= 1.0;
+      premium *= petrolMultiplication;
     }
     else if(fuelType == FuelType.Diesel) {
-      premium *= 1.1;
+      premium *= dieselMultiplication;
     }
     else if (fuelType == FuelType.LPG) {
-      premium *= 1.1;
+      premium *= lpgMultiplication;
     }
     else if (fuelType == FuelType.Electric) {
-      premium *= 1.2;
+      premium *= electricMultiplication;
     }
     else if (fuelType == FuelType.Hybrid) {
-      premium *= 1.0;
+      premium *= hybridMultiplication;
     }
 
     return premium;
@@ -173,21 +220,21 @@ class CalculatePremiums {
       FuelType fuelType,
       ){
 
-    double premium = (((300.0 / ownerAge) + (500.0 / userAge)) * ((engineCapacity / 100.0) + (enginePower / 100.0))) * (policyDuration/365.0);
+    double premium = (((krOwnerCarDividend / ownerAge) + (krUserCarDividend / userAge)) * ((engineCapacity / krEngineCapacityDivider) + (enginePower / krEnginePowerDivider))) * (policyDuration/policyDurationDivider);
     if (fuelType == FuelType.Petrol) {
-      premium *= 1.0;
+      premium *= petrolMultiplication;
     }
     else if(fuelType == FuelType.Diesel) {
-      premium *= 1.1;
+      premium *= dieselMultiplication;
     }
     else if (fuelType == FuelType.LPG) {
-      premium *= 1.1;
+      premium *= lpgMultiplication;
     }
     else if (fuelType == FuelType.Electric) {
-      premium *= 1.2;
+      premium *= electricMultiplication;
     }
     else if (fuelType == FuelType.Hybrid) {
-      premium *= 1.0;
+      premium *= hybridMultiplication;
     }
 
     return premium;
@@ -195,37 +242,33 @@ class CalculatePremiums {
   }
   double _calcNNW(int engineCapacity, int enginePower,){
 
-    if (engineCapacity + enginePower < 3000) {
-      return 60;
+    if (engineCapacity + enginePower < nnwBreakPoint) {
+      return nnwSmallerPremium;
     }
     else{
-      return 120;
+      return nnwBiggerPremium;
     }
   }
   double _calcBLS(int engineCapacity, int enginePower,){
-    return 16;
+    return blsPremium;
   }
   double _calcASS(int engineCapacity, int enginePower,){
-    return 12;
+    return assPremium;
   }
   double _calcWindows(){
-    return 114;
+    return windowsPremium;
   }
   double _calcTires(){
 
-    return 102;
-
+    return tiresPremium;
   }
   double _calcWAS(int engineCapacity, int enginePower,){
-    if (engineCapacity + enginePower < 3000) {
-      return 102;
+    if (engineCapacity + enginePower < wasBreakPoint) {
+      return wasSmallerPremium;
     }
     else{
-      return 160;
+      return wasBiggerPremium;
     }
 
   }
-
-
-
 }

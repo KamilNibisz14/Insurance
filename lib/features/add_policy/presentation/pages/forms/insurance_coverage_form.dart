@@ -8,6 +8,7 @@ import '../../widgets/insurance_coverage_checkbox.dart';
 import '../../widgets/next_form_button.dart';
 import '../../widgets/premiums_dropdown_button.dart';
 import '../policy_view.dart';
+import 'form_constants.dart';
 
 class InsuranceCoverageForm extends StatelessWidget {
   const InsuranceCoverageForm({Key? key}) : super(key: key);
@@ -20,6 +21,10 @@ class InsuranceCoverageForm extends StatelessWidget {
 
     InsuranceCoverageData insuranceCoverageData = InsuranceCoverageData();
     int numberOfPremiums = 1;
+
+    const double premiumsTopPadding = 40;
+    const double premiumsRightPadding = 50;
+    const double premiumsDropdownButtonTopPadding = 20;
 
     return MultiBlocListener(
       listeners: [
@@ -36,7 +41,7 @@ class InsuranceCoverageForm extends StatelessWidget {
             Align(
                 alignment: Alignment.topLeft,
                 child: Container(
-                  margin: const EdgeInsets.all(20),
+                  margin: const EdgeInsets.all(formMargin),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -169,7 +174,7 @@ class InsuranceCoverageForm extends StatelessWidget {
             Align(
               alignment: Alignment.topRight,
               child: Container(
-                margin: const EdgeInsets.only(top: 40, right: 50),
+                margin: const EdgeInsets.only(top: premiumsTopPadding, right: premiumsRightPadding),
                 child: SizedBox(
                   width: premiumsContainerWidth,
                   child: Column(
@@ -182,7 +187,7 @@ class InsuranceCoverageForm extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.only(top: 20),
+                        margin: const EdgeInsets.only(top: premiumsDropdownButtonTopPadding),
                         width: premiumsContainerWidth,
                         child: PremiumsDropdownButton(
                           getData: (value){

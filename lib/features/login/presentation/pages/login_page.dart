@@ -25,8 +25,7 @@ class LoginPage extends StatelessWidget {
                     child: Image.asset('img/car.png', height: imageWidth)),
               ],
             )),
-            Container(
-              margin: const EdgeInsets.only(top:0),
+            SizedBox(
               width: textFieldWidth,
               child: const LoginForm())
           ],

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:insurance/features/add_policy/domain/entities/car_owner_data.dart';
 import 'package:insurance/features/add_policy/presentation/bloc/add_policy_bloc.dart';
 import 'package:insurance/features/add_policy/presentation/navigation_bloc/navigation_bloc.dart';
 
+import '../../../domain/entities/navigation_data.dart';
 import '../../widgets/bottom_navigation_form.dart';
 import '../../widgets/top_bar_info.dart';
 import '../forms/car_user_form.dart';
@@ -41,10 +41,10 @@ class CarUserFormPage extends StatelessWidget {
               listener: (context, state) {
               },
 
-              child: CarUserForm(),
+              child: const CarUserForm(),
             ),
             BottomNavigationForm(
-              position: 3,
+              position: NavigationData.carUser,
             )
           ],
         ),

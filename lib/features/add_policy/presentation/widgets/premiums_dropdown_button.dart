@@ -29,7 +29,7 @@ class _PremiumsDropdownButtonState extends State<PremiumsDropdownButton> {
         items: arrayOfPremiums.map<DropdownMenuItem<int>>((int value) {
           return DropdownMenuItem<int>(
             value: value,
-            child: Text(value.toString(),style: TextStyle(fontSize: 18),),
+            child: Text(value.toString(),style: const TextStyle(fontSize: 18),),
           );
         }).toList(),
       ),

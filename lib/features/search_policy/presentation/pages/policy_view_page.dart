@@ -14,6 +14,13 @@ class PolicyViewPage extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     double textFontSize = screenWidth / 17;
     double buttonFontSize = screenWidth / 23;
+
+    const double policyFoundButtonMargin = 20.0;
+    const double policyNotFoundButtonMargin = 15.0;
+    const double textPadding = 8.0;
+
+
+
     return Scaffold(
       body: BlocBuilder<SearchPolicyBloc, SearchPolicyState>(
           builder: (context, state) {
@@ -25,14 +32,14 @@ class PolicyViewPage extends StatelessWidget {
                     children: [
                       PolicyView(policyData: state.policyViewData,),
                       Container(
-                        margin: const EdgeInsets.only(top: 20, right: 20, bottom: 20),
+                        margin: const EdgeInsets.only(top: policyFoundButtonMargin, right: policyFoundButtonMargin, bottom: policyFoundButtonMargin),
                         child: ElevatedButton(
                           onPressed: (){
                             Navigator.pushNamed(context, MainPage.id);
                             context.read<SearchPolicyBloc>().add(ExitPolicyView());
                           },
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(textPadding),
                             child: Text(
                               'Main Menu',
                               style: TextStyle(
@@ -61,7 +68,7 @@ class PolicyViewPage extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top:15.0),
+                      padding: const EdgeInsets.only(top:policyNotFoundButtonMargin),
                       child: ElevatedButton(
                         onPressed: (){
                           Navigator.pushNamed(context, MainPage.id);
@@ -83,17 +90,6 @@ class PolicyViewPage extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             }
           }
-      ),
-    );
-      Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              //PolicyView()
-            ],
-          ),
-        ),
       ),
     );
   }

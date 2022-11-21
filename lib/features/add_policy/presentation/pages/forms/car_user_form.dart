@@ -8,6 +8,7 @@ import 'package:insurance/features/add_policy/presentation/pages/forms_page/car_
 
 import '../../widgets/custom_text_form.dart';
 import '../../widgets/next_form_button.dart';
+import 'form_constants.dart';
 
 // ignore: must_be_immutable
 class CarUserForm extends StatelessWidget {
@@ -52,7 +53,7 @@ class CarUserForm extends StatelessWidget {
             Align(
                 alignment: Alignment.center,
                 child: Container(
-                  margin: const EdgeInsets.all(20),
+                  margin: const EdgeInsets.all(formMargin),
                   child: SingleChildScrollView(
                     child: Form(
                       key: formKey,
@@ -63,7 +64,7 @@ class CarUserForm extends StatelessWidget {
                             children: [
                               Expanded(
                                   child: Padding(
-                                padding: const EdgeInsets.only(right: 15),
+                                padding: const EdgeInsets.only(right: customFormFieldPadding),
                                 child: CustomTextForm(
                                     label: 'Name*',
                                     initialState: initialTextField.name,
@@ -76,7 +77,7 @@ class CarUserForm extends StatelessWidget {
                                       (val) {
                                         if (val
                                             .toString()
-                                            .contains(new RegExp(r'[0-9]'))) {
+                                            .contains(RegExp(r'[0-9]'))) {
                                           return "field can't contain number";
                                         }
                                         return null;
@@ -85,7 +86,7 @@ class CarUserForm extends StatelessWidget {
                               )),
                               Expanded(
                                   child: Padding(
-                                padding: const EdgeInsets.only(left: 15),
+                                padding: const EdgeInsets.only(left: customFormFieldPadding),
                                 child: CustomTextForm(
                                     label: 'Middle Name',
                                     initialState: initialTextField.middleName == null ? '': initialTextField.middleName!,
@@ -97,7 +98,7 @@ class CarUserForm extends StatelessWidget {
                                       (val) {
                                         if (val
                                             .toString()
-                                            .contains(new RegExp(r'[0-9]'))) {
+                                            .contains(RegExp(r'[0-9]'))) {
                                           return "field can't contain number";
                                         }
                                         return null;
@@ -110,7 +111,7 @@ class CarUserForm extends StatelessWidget {
                             children: [
                               Expanded(
                                   child: Padding(
-                                padding: const EdgeInsets.only(right: 15),
+                                padding: const EdgeInsets.only(right: customFormFieldPadding),
                                 child: CustomTextForm(
                                     label: 'Surname*',
                                     initialState: initialTextField.surname,
@@ -123,7 +124,7 @@ class CarUserForm extends StatelessWidget {
                                       (val) {
                                         if (val
                                             .toString()
-                                            .contains(new RegExp(r'[0-9]'))) {
+                                            .contains(RegExp(r'[0-9]'))) {
                                           return "field can't contain number";
                                         }
                                         return null;
@@ -132,7 +133,7 @@ class CarUserForm extends StatelessWidget {
                               )),
                               Expanded(
                                   child: Padding(
-                                padding: const EdgeInsets.only(left: 15),
+                                padding: const EdgeInsets.only(left: customFormFieldPadding),
                                 child: CustomTextForm(
                                     label: 'Personal ID*',
                                     initialState: initialTextField.personalID,
@@ -144,11 +145,11 @@ class CarUserForm extends StatelessWidget {
                                       FormBuilderValidators.required(),
                                       FormBuilderValidators.numeric(
                                           errorText:
-                                              'Pesel contains only number'),
+                                              'Personal ID contains only number'),
                                       FormBuilderValidators.maxLength(11,
-                                          errorText: 'Pesel have 11 numbers'),
+                                          errorText: 'Personal ID have 11 numbers'),
                                       FormBuilderValidators.minLength(11,
-                                          errorText: 'Pesel have 11 numbers'),
+                                          errorText: 'Personal ID have 11 numbers'),
                                     ])),
                               )),
                             ],
@@ -157,7 +158,7 @@ class CarUserForm extends StatelessWidget {
                             children: [
                               Expanded(
                                   child: Padding(
-                                padding: const EdgeInsets.only(right: 15),
+                                padding: const EdgeInsets.only(right: customFormFieldPadding),
                                 child: CustomTextForm(
                                     label: 'City*',
                                     initialState: initialTextField.city,
@@ -170,7 +171,7 @@ class CarUserForm extends StatelessWidget {
                                       (val) {
                                         if (val
                                             .toString()
-                                            .contains(new RegExp(r'[0-9]'))) {
+                                            .contains(RegExp(r'[0-9]'))) {
                                           return "field can't contain number";
                                         }
                                         return null;
@@ -179,7 +180,7 @@ class CarUserForm extends StatelessWidget {
                               )),
                               Expanded(
                                   child: Padding(
-                                padding: const EdgeInsets.only(left: 15),
+                                padding: const EdgeInsets.only(left: customFormFieldPadding),
                                 child: CustomTextForm(
                                     label: 'Street*',
                                     initialState: initialTextField.street,
@@ -192,7 +193,7 @@ class CarUserForm extends StatelessWidget {
                                       (val) {
                                         if (val
                                             .toString()
-                                            .contains(new RegExp(r'[0-9]'))) {
+                                            .contains(RegExp(r'[0-9]'))) {
                                           return "field can't contain number";
                                         }
                                         return null;
@@ -205,7 +206,7 @@ class CarUserForm extends StatelessWidget {
                             children: [
                               Expanded(
                                   child: Padding(
-                                padding: const EdgeInsets.only(right: 15),
+                                padding: const EdgeInsets.only(right: customFormFieldPadding),
                                 child: CustomTextForm(
                                     label: 'House Number*',
                                     initialState: initialTextField.houseNumber,
@@ -221,9 +222,9 @@ class CarUserForm extends StatelessWidget {
                               )),
                               Expanded(
                                   child: Padding(
-                                padding: const EdgeInsets.only(left: 15),
+                                padding: const EdgeInsets.only(left: customFormFieldPadding),
                                 child: CustomTextForm(
-                                    label: 'Apartmant Number*',
+                                    label: 'Apartment Number*',
                                     initialState: initialTextField.apartmentNumber,
                                     getData: (String arg) {
                                       carUserData.apartmentNumber = arg;
@@ -241,7 +242,7 @@ class CarUserForm extends StatelessWidget {
                             children: [
                               Expanded(
                                   child: Padding(
-                                padding: const EdgeInsets.only(right: 15),
+                                padding: const EdgeInsets.only(right: customFormFieldPadding),
                                 child: CustomTextForm(
                                     label: 'Postal Address*',
                                     initialState: initialTextField.postalNumber,
@@ -256,7 +257,7 @@ class CarUserForm extends StatelessWidget {
                                       (val) {
                                         if (!val
                                             .toString()
-                                            .contains(new RegExp(r'[0-9]'))) {
+                                            .contains(RegExp(r'[0-9]'))) {
                                           return "Invalid Postal Address";
                                         }
                                         if (val.toString().length > 2) {
@@ -270,11 +271,11 @@ class CarUserForm extends StatelessWidget {
                               )),
                               Expanded(
                                   child: Padding(
-                                      padding: const EdgeInsets.only(left: 15),
+                                      padding: const EdgeInsets.only(left: customFormFieldPadding),
                                       child: Container())),
                             ],
                           ),
-                          const Padding(padding: EdgeInsets.only(bottom: 60))
+                          const Padding(padding: EdgeInsets.only(bottom: bottomFormPadding))
                         ],
                       ),
                     ),

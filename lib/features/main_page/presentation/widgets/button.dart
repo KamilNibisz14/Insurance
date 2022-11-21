@@ -12,20 +12,29 @@ class ActionSelectionButton extends StatelessWidget {
     double buttonSize = screenWidth /4.5 ;
     double iconDataSize = screenWidth / 14;
     double borderRadius = screenWidth/ 17;
+
+
+    const double buttonColorOpacity = 0.9;
+    const double buttonShadowOpacity = 0.5;
+    const double buttonShadowOffset = 5;
+    const double buttonShadowSpreadRadius = 3;
+    const double buttonShadowBlurRadius = 5;
+
+
     return GestureDetector(
       onTap: goToPageAction,
       child: Container(
         height: buttonSize,
         width:  buttonSize,
         decoration: BoxDecoration(
-          color: Colors.blueAccent.withOpacity(0.9),
+          color: Colors.blueAccent.withOpacity(buttonColorOpacity),
           borderRadius: BorderRadius.circular(borderRadius),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 3,
-              blurRadius: 5,
-              offset: const Offset(5, 5), // changes position of shadow
+              color: Colors.grey.withOpacity(buttonShadowOpacity),
+              spreadRadius: buttonShadowSpreadRadius,
+              blurRadius: buttonShadowBlurRadius,
+              offset: const Offset(buttonShadowOffset, buttonShadowOffset), // changes position of shadow
             ),
           ],
         ),
