@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:insurance/features/search_policy/presentation/navigation/search_policy_navigation_bloc.dart';
 
+// ignore: must_be_immutable
 class SearchPolicyTextFieldForm extends StatelessWidget {
   SearchPolicyTextFieldForm({Key? key, required this.getData})
       : super(key: key);
@@ -16,7 +17,13 @@ class SearchPolicyTextFieldForm extends StatelessWidget {
     double textFormFieldwidth = screenWidth / 1.2;
     final formKey = GlobalKey<FormState>();
 
-    void IfFormIsCorrect() {
+
+    const double textInputPaddingVertical = 10.0;
+    const double textInputPaddingHorizontal = 10.0;
+    const int policyLength = 13;
+
+
+    void ifFormIsCorrect() {
       if (formKey.currentState!.validate()) {
         context.read<SearchPolicyNavigationBloc>().add(EnableToGoNextPageEvent());
       } else {
@@ -35,14 +42,14 @@ class SearchPolicyTextFieldForm extends StatelessWidget {
             initialValue: '90857',
               onChanged: (value) {
                 getData(value);
-                IfFormIsCorrect(); 
+                ifFormIsCorrect();
               },
               keyboardType: TextInputType.number,
               textAlign: TextAlign.center,
               decoration: const InputDecoration(
                 hintText: 'Enter policy ID',
                 contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                    EdgeInsets.symmetric(vertical: textInputPaddingVertical, horizontal: textInputPaddingHorizontal),
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.blueAccent),
                 ),
@@ -57,8 +64,8 @@ class SearchPolicyTextFieldForm extends StatelessWidget {
               validator: FormBuilderValidators.compose([
                 FormBuilderValidators.numeric(),
                 FormBuilderValidators.required(),
-                FormBuilderValidators.maxLength(13),
-                FormBuilderValidators.minLength(13),
+                FormBuilderValidators.maxLength(policyLength),
+                FormBuilderValidators.minLength(policyLength),
               ])),
         ),
       ),

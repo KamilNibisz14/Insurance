@@ -28,7 +28,7 @@ class _EnumFuelDropdownButtonState extends State<EnumFuelDropdownButton> {
         items: arrayOfFuel.map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
-            child: Text(value,style: TextStyle(fontSize: 18),),
+            child: Text(value,style: const TextStyle(fontSize: 18),),
           );
         }).toList(),
     );

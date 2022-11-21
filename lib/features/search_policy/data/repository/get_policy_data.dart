@@ -59,7 +59,7 @@ class GetPolicyDataFromRepository{
       numberOfSeats:value['numberOfSeats'],
       weight:value['weight']
       );
-    };
+    }
   }  
 
 

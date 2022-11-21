@@ -11,6 +11,7 @@ import '../../widgets/custom_text_form.dart';
 import '../../widgets/enumFuelButton.dart';
 import '../../widgets/next_form_button.dart';
 import '../forms_page/insurance_coverage_form_page.dart';
+import 'form_constants.dart';
 
 
 class CarForm extends StatelessWidget {
@@ -28,6 +29,14 @@ class CarForm extends StatelessWidget {
     String engineCapacity = '';
     String enginePower = '';
     String weight = '';
+
+
+    const double dataRangePickerIconPadding = 50;
+    const double iconSize = 30;
+    const double dataRangePickerTopPadding = 60;
+    const double dataRangePickerHorizontalPadding = 10;
+
+
     // ignore: non_constant_identifier_names
     void IfFormIsCorrect() {
       if (formKey.currentState!.validate() && dateValidate) {
@@ -52,7 +61,7 @@ class CarForm extends StatelessWidget {
             Align(
                 alignment: Alignment.center,
                 child: Container(
-                  margin: const EdgeInsets.all(20),
+                  margin: const EdgeInsets.all(formMargin),
                   child: SingleChildScrollView(
                     child: Form(
                       key: formKey,
@@ -63,7 +72,7 @@ class CarForm extends StatelessWidget {
                             children: [
                               Expanded(
                                   child: Padding(
-                                    padding: const EdgeInsets.only(right: 15),
+                                    padding: const EdgeInsets.only(right: customFormFieldPadding),
                                     child: CustomTextForm(
                                         label: 'Brand*',
                                         getData: (String arg) {
@@ -83,7 +92,7 @@ class CarForm extends StatelessWidget {
                                   )),
                               Expanded(
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: 15),
+                                    padding: const EdgeInsets.only(left: customFormFieldPadding),
                                     child: CustomTextForm(
                                         label: 'Model*',
                                         getData: (String arg) {
@@ -100,7 +109,7 @@ class CarForm extends StatelessWidget {
                             children: [
                               Expanded(
                                   child: Padding(
-                                    padding: const EdgeInsets.only(right: 15),
+                                    padding: const EdgeInsets.only(right: customFormFieldPadding),
                                     child: CustomTextForm(
                                         label: 'Country of registration*',
                                         getData: (String arg) {
@@ -122,7 +131,7 @@ class CarForm extends StatelessWidget {
                                   )),
                               Expanded(
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: 15),
+                                    padding: const EdgeInsets.only(left: customFormFieldPadding),
                                     child: CustomTextForm(
                                         label: 'Registration number*',
                                         getData: (String arg) {
@@ -142,7 +151,7 @@ class CarForm extends StatelessWidget {
                             children: [
                               Expanded(
                                   child: Padding(
-                                    padding: const EdgeInsets.only(right: 15),
+                                    padding: const EdgeInsets.only(right: customFormFieldPadding),
                                     child: CustomTextForm(
                                         label: 'VIN*',
                                         getData: (String arg) {
@@ -157,7 +166,7 @@ class CarForm extends StatelessWidget {
                                   )),
                               Expanded(
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: 15),
+                                    padding: const EdgeInsets.only(left: customFormFieldPadding),
                                     child: CustomTextForm(
                                         label: 'Engine capacity*',
                                         getData: (String arg) {
@@ -166,7 +175,7 @@ class CarForm extends StatelessWidget {
                                         },
                                         validator: FormBuilderValidators.compose([
                                           FormBuilderValidators.required(),
-                                          FormBuilderValidators.min(3),
+                                          FormBuilderValidators.minLength(3),
                                           FormBuilderValidators.maxLength(6),
                                           FormBuilderValidators.numeric(),
                                         ])),
@@ -177,7 +186,7 @@ class CarForm extends StatelessWidget {
                             children: [
                               Expanded(
                                   child: Padding(
-                                    padding: const EdgeInsets.only(right: 15),
+                                    padding: const EdgeInsets.only(right: customFormFieldPadding),
                                     child: CustomTextForm(
                                         label: 'Engine power*',
                                         getData: (String arg) {
@@ -187,13 +196,13 @@ class CarForm extends StatelessWidget {
                                         validator: FormBuilderValidators.compose([
                                           FormBuilderValidators.required(),
                                           FormBuilderValidators.numeric(),
-                                          FormBuilderValidators.min(2),
+                                          FormBuilderValidators.minLength(2),
                                           FormBuilderValidators.maxLength(4),
                                         ])),
                                   )),
                               Expanded(
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: 15),
+                                    padding: const EdgeInsets.only(left: customFormFieldPadding),
                                     child: CustomTextForm(
                                         label: 'Weight*',
                                         getData: (String arg) {
@@ -204,7 +213,7 @@ class CarForm extends StatelessWidget {
                                           FormBuilderValidators.required(),
                                           FormBuilderValidators.numeric(),
                                           FormBuilderValidators.maxLength(5),
-                                          FormBuilderValidators.min(3)
+                                          FormBuilderValidators.minLength(3)
                                         ])),
                                   )),
                             ],
@@ -213,7 +222,7 @@ class CarForm extends StatelessWidget {
                             children: [
                               Expanded(
                                   child: Padding(
-                                    padding: const EdgeInsets.only(right: 15,top: 15),
+                                    padding: const EdgeInsets.only(right: customFormFieldPadding,top: customFormFieldPadding),
                                     child: CustomTextForm(
                                         label: 'Number Of seats*',
                                         getData: (String arg) {
@@ -228,7 +237,7 @@ class CarForm extends StatelessWidget {
                                   )),
                               Expanded(
                                   child: Padding(
-                                      padding: const EdgeInsets.only(left: 15),
+                                      padding: const EdgeInsets.only(left: customFormFieldPadding),
                                       child: EnumFuelDropdownButton(
                                         getData: (value){
                                           if(value == 'LPG'){
@@ -251,12 +260,12 @@ class CarForm extends StatelessWidget {
                           Row(
                             children: [
                               const Padding(
-                                padding: EdgeInsets.only(left: 50),
-                                child: Icon(Icons.date_range_rounded,size: 30,),
+                                padding: EdgeInsets.only(left: dataRangePickerIconPadding),
+                                child: Icon(Icons.date_range_rounded,size: iconSize,),
                               ),
                               Expanded(
                                   child: Padding(
-                                    padding: const EdgeInsets.only(right: 60,top: 10,left: 10),
+                                    padding: const EdgeInsets.only(right: dataRangePickerTopPadding,top: dataRangePickerHorizontalPadding,left: dataRangePickerHorizontalPadding),
                                     child:  SizedBox(
                                         height: textFieldHeight,
                                         child: FormBuilderDateTimePicker(
@@ -281,7 +290,7 @@ class CarForm extends StatelessWidget {
                                   )),
                             ],
                           ),
-                          const Padding(padding: EdgeInsets.only(bottom: 60))
+                          const Padding(padding: EdgeInsets.only(bottom: bottomFormPadding))
                         ],
                       ),
                     ),

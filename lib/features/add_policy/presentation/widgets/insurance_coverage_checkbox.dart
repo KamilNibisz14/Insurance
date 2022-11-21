@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class InsuranceCoverageCheckbox extends StatefulWidget {
   InsuranceCoverageCheckbox({
     Key? key,

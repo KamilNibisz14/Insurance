@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../domain/entities/navigation_data.dart';
 import '../../navigation_bloc/navigation_bloc.dart';
 import '../../widgets/bottom_navigation_form.dart';
 import '../../widgets/top_bar_info.dart';
@@ -38,7 +39,7 @@ class InsuranceCoverageFormPage extends StatelessWidget {
           children: [
             const InsuranceCoverageForm(),
             BottomNavigationForm(
-              position: 5,
+              position: NavigationData.insuranceCoverage,
             )
           ],
         ),

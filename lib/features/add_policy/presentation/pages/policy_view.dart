@@ -25,7 +25,7 @@ class AddPolicyViewPage extends StatelessWidget {
                     children: [
                       PolicyView(policyData: state.policyData),
                       Container(
-                        margin: EdgeInsets.only(top: 20, right: 20,bottom: 20),
+                        margin: const EdgeInsets.only(top: 20, right: 20,bottom: 20),
                         child: ElevatedButton(
                           onPressed: () { 
                             context.read<NavigationBloc>().add(UnenableToGoNextPageEvent());

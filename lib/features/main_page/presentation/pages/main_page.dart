@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:insurance/features/add_policy/data/repository/get_policy_ID.dart';
-import 'package:insurance/features/add_policy/domain/usecases/calculate_premiums.dart';
 import 'package:insurance/features/add_policy/presentation/pages/forms_page/policy_duration_form_page.dart';
-import 'package:insurance/locator.dart';
 
 import '../../../search_policy/presentation/pages/search_policy_page.dart';
 import '../widgets/button.dart';
@@ -15,13 +12,18 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double imageWidth = screenWidth / 4.5;
+
+
+    const double containerMarginBottom = 60.0;
+
+
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            margin: const EdgeInsets.only(bottom: 60),
+            margin: const EdgeInsets.only(bottom: containerMarginBottom),
             child: Center(
               child: Hero(
                   tag: 'logo',

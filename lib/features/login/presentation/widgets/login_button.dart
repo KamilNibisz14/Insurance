@@ -12,6 +12,7 @@ class LoginButton extends StatelessWidget {
     double buttonWidth = screenWidth / 1.8;
     double borderCircular = screenWidth / 10;
     double fontSize = screenWidth / 20;
+
     return GestureDetector(
       onTap: onPressed,
       child: Container(

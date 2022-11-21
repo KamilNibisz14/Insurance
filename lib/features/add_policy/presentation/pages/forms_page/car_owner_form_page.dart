@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:insurance/features/add_policy/presentation/navigation_bloc/navigation_bloc.dart';
 
+import '../../../domain/entities/navigation_data.dart';
 import '../../widgets/bottom_navigation_form.dart';
 import '../../widgets/top_bar_info.dart';
 import '../forms/car_owner_form.dart';
@@ -37,7 +38,7 @@ class CarOwnerFormPage extends StatelessWidget {
           children: [
             const CarOwnerForm(),
             BottomNavigationForm(
-              position: 2,
+              position: NavigationData.carOwner,
             )
           ],
         ),
